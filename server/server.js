@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // Formulario de login
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../app/views', 'login.html'));
+    res.status(200).sendFile(path.join(__dirname, '../app/views', 'login.html'));
 });
 
 // Procesar credenciales
@@ -39,7 +39,7 @@ app.post('/login', (req, res) => {
         return res.redirect('/home');
     }
 
-    res.send(`
+    res.status(401).send(`
         <script>
             alert('Usuario o contraseña incorrectos.');
             window.location.href = '/login';
@@ -53,7 +53,7 @@ app.get('/home', (req, res) => {
     if (!req.session.usuario) {
         return res.redirect('/login');
     }
-    res.sendFile(path.join(__dirname, '../app/views', 'bienvenida.html'));
+    res.status(200).sendFile(path.join(__dirname, '../app/views', 'bienvenida.html'));
 });
 
 // Cerrar sesión
